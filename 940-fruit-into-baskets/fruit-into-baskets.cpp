@@ -1,28 +1,27 @@
-#include <vector>
-#include <unordered_map>
-#include <algorithm>
-using namespace std;
-
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
-        int start = 0, maxLen = 0;
-        unordered_map<int, int> basket;
+    int n = fruits.size();
+    unordered_map<int, int> mp;
+    int i = 0, j = 0;
+    int count = 0;
 
-        for (int end = 0; end < fruits.size(); ++end) {
-            basket[fruits[end]]++;
+    while (j < n) {
+        mp[fruits[j]]++;
 
-            while (basket.size() > 2) {
-                basket[fruits[start]]--;
-                if (basket[fruits[start]] == 0) {
-                    basket.erase(fruits[start]);
-                }
-                start++;
+        if (mp.size() <= 2) {
+            count = max(count, j - i + 1);
+        } else {
+            mp[fruits[i]]--;
+            if (mp[fruits[i]] == 0) {
+                mp.erase(fruits[i]);
             }
-
-            maxLen = max(maxLen, end - start + 1);
+            i++;
         }
 
-        return maxLen;
+        j++;
     }
+
+    return count;
+}
 };
