@@ -9,7 +9,7 @@ public:
             if (index[c] >= start) {
                 start = index[c] + 1; // Move start to avoid duplicate
             }
-            index[c] = end; // Update last seen index
+            index[c] = end;  // Update last seen index
             maxLen = max(maxLen, end - start + 1);
         }
 
